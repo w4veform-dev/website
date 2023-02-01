@@ -1,6 +1,11 @@
 const fs = require('fs');
+const cleancss = require('clean-css');
+const MarkdownIt = require('markdown-it');
 
 module.exports = function(eleventyConfig) {
+    eleventyConfig.addPassthroughCopy("assets");
+    eleventyConfig.addWatchTarget("./command_outputs");
+
     eleventyConfig.addShortcode("ascii_header", function() {
         var data = fs.readFileSync("asciiname.txt");
         return `
