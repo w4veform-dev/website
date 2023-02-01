@@ -7,7 +7,6 @@ testdata:
     Blog: /blog
     Cookbook: /recipes
     Guns: /guns
-    Workouts: /workouts
 ---
 <html>
     <head>
@@ -25,7 +24,7 @@ testdata:
     {% ascii_header %}
 
     <div class="mt-24 pb-16 mx-auto max-w-screen-2xl">
-        <div class="grid grid-cols-{{ testdata.size }} gap-4 grid-flow-col px-10">
+        <div class="grid grid-cols-{{ testdata.size }} gap-4 grid-flow-col px-40">
             {%- for pageKey in pagination.pages %}
                 <div class="text-center border-2 border-cyan-400 py-1.5 transition duration-300 hover:bg-cyan-400 hover:text-[#1A1C23]">
                     <a href="{{ testdata[pageKey] }}">
