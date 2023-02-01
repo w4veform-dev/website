@@ -1,0 +1,47 @@
+---
+title: W4veform
+pagination:
+    data: testdata
+    size: 1
+testdata:
+    Page 1: /page1
+    Page 2: /page2
+    Page 3: /page3
+---
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            * {
+                font-family: 'Fira Code', monospace !important;
+            }
+        </style>
+    </head>
+    <body class="bg-[#16161C] text-white pt-8">
+
+    {% ascii_header %}
+
+    <div class="mt-24 mx-auto max-w-screen-2xl">
+        <div class="flex flex-row place-content-center space-x-10 px-10">
+            {%- for pageKey in pagination.pages %}
+                <a href="{{ testdata[pageKey] }}" class="grow text-center border-2 border-cyan-400 p-1.5 transition duration-300 hover:bg-cyan-400 hover:text-[#1A1C23]">
+                    {{ pageKey }}
+                </a>
+            {%- endfor %}
+            <a class="grow text-center border-2 border-cyan-400 p-1.5 hidden"></a>
+        </div>
+    </div>
+
+    <div class="px-10">
+        <div class="mx-auto max-w-screen-2xl mt-16 border-2 border-cyan-400">
+            <div class="px-1 w-full bg-cyan-400 text-[#1A1C23]">
+                <span>&lambda; cat README.txt</span>
+            </div>
+            <div class="p-3">
+                <p>We stay silly :3</p>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
