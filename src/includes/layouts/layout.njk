@@ -1,0 +1,15 @@
+<html>
+    <head>
+        {% include "partials/meta.njk" %}
+        <!-- <link rel="stylesheet" href="/assets/style.css"> -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            * {
+                font-family: 'Fira Code', monospace !important;
+            }
+        </style>
+    </head>
+    <body class="bg-[#16161C] text-white pt-8">
+        {{ content | safe }}
+    </body>
+</html>

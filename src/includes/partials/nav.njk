@@ -1,0 +1,11 @@
+<div class="mx-auto max-w-screen-2xl">
+    <div class="grid grid-cols-{{ nav.items.size }} gap-4 grid-flow-col px-40">
+        {%- for item in nav.items %}
+            <div class="text-center border-2 border-cyan-400 py-1.5 transition duration-300 hover:bg-cyan-400 hover:text-[#1A1C23]">
+                <a href="{{ item.url }}">
+                    {{ item.name }}
+                </a>
+            </div>
+        {%- endfor %}
+    </div>
+</div>

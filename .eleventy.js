@@ -3,19 +3,15 @@ const cleancss = require('clean-css');
 const MarkdownIt = require('markdown-it');
 
 module.exports = function(eleventyConfig) {
+    // Passthroughs //
     eleventyConfig.addPassthroughCopy("assets");
-    eleventyConfig.addWatchTarget("./command_outputs");
 
-    eleventyConfig.addShortcode("ascii_header", function() {
-        var data = fs.readFileSync("asciiname.txt");
-        return `
-        <div class="container mx-auto text-center">
-            <pre class="font-bold bg-gradient-to-b from-cyan-400 via-cyan-100 to-pink-300 bg-clip-text" style="color: rgba(0, 0, 0, 0)">${data}</pre>
-        </div>`;
-    });
+    // Layouts //
+    eleventyConfig.addLayoutAlias("base", "layouts/layout.njk")
 
+    // Shortcodes //
     eleventyConfig.addShortcode("command_block", function(command, content_file) {
-        var data = fs.readFileSync("./command_outputs/" + content_file, 'utf-8');
+        var data = fs.readFileSync("./src/content/command_outputs/" + content_file, 'utf-8');
         var rendered = new MarkdownIt().render(data);
         return `
         <div class="px-10">
@@ -27,7 +23,17 @@ module.exports = function(eleventyConfig) {
                     ${rendered}
                 </div>
             </div>
-        </div>
-        `;
+        </div>`;
     });
+    
+    // Base Config //
+    return {
+        passthroughFileCopy: true,
+        dir: {
+            input: "src",
+            includes: "includes",
+            layouts: "includes/layouts",
+            data: "data"
+        }
+    };
 };
