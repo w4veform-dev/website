@@ -1,0 +1,58 @@
+<html>
+    <head>
+        {% include "partials/meta.njk" %}
+        <!-- <link rel="stylesheet" href="/assets/style.css"> -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            * {
+                font-family: 'Fira Code', monospace !important;
+            }
+            p {
+                padding-bottom: 12px;
+            }
+        </style>
+    </head>
+    <body class="bg-[#16161C] text-white pt-8">
+        {% include "partials/ascii_header.njk" %}
+        <br class="my-4">
+        <style>
+            .nav--active {
+                background-color: {{ style.colors.accent }};
+                color: {{ style.colors.accentText }};
+            }
+        </style>
+        <div class="mx-auto max-w-prose">
+            <div class="grid grid-cols-{{ nav.items.size }} gap-4 grid-flow-col">
+                {%- for item in nav.items %}
+                    {%- set Current = (item.url == page.url) -%}
+                    {%- set Parent = item.url != '/' and item.url in page.url -%}
+                    <a {% if Current or Parent %} aria-current="page" {% endif %}href="{{ item.url }}" class="py-1.5 text-center border-2 border-[{{ style.colors.accent }}] {% if Current or Parent %}nav--active{% else %} transition duration-300 hover:bg-[{{ style.colors.accent }}] hover:text-[{{ style.colors.accentText }}]{% endif %}">
+                        {{ item.name }}
+                    </a>
+                {%- endfor %}
+            </div>
+        </div>
+        <br class="my-4">
+        <div class="mx-auto max-w-prose py-3">
+            <div class="flex flex-row relative">
+                <h1 class="text-2xl basis-4/5">{{ title }}</h1>
+                <div class="relative basis-1/5">
+                    <h2 class="absolute bottom-0">{{ date | dateFilter }}</h2>
+                </div>
+            </div>
+            <div class="tags--container">
+        {% set total = tags | length %}
+        {% set index = 0 %}
+        {% for tag in tags %}
+            {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+            {% set index = index + 1 %}
+            <a class="text-[{{ style.colors.accent }}]" href="{{ tagUrl | url }}">{{ tag }}</a>{% if index < total %},{% endif %}
+        {% endfor %}
+        </div>
+            <hr class="pb-1 mt-2">
+        </div>
+        <div class="max-w-prose mx-auto">
+            {{ content | safe }}
+        </div>
+    </body>
+</html>

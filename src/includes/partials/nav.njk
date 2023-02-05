@@ -1,11 +1,11 @@
-<div class="mx-auto max-w-screen-2xl">
-    <div class="grid grid-cols-{{ nav.items.size }} gap-4 grid-flow-col px-40">
+<div class="mx-auto sm:max-w-prose md:max-w-prose lg:max-w-4xl xl:max-w-5xl">
+    <div class="grid grid-cols-{{ nav.items.size }} gap-4 grid-flow-col">
         {%- for item in nav.items %}
-            <div class="text-center border-2 border-cyan-400 py-1.5 transition duration-300 hover:bg-cyan-400 hover:text-[#1A1C23]">
-                <a href="{{ item.url }}">
-                    {{ item.name }}
-                </a>
-            </div>
+            {%- set Current = (item.url == page.url) -%}
+            {%- set Parent = item.url != '/' and item.url in page.url -%}
+            <a href="{{ item.url }}" class="text-center border-2 {% if Current or Parent %}border-[{{ style.colors.active }}] {% else %}border-[{{ style.colors.accent }}] hover:bg-[{{ style.colors.accent }}] hover:text-[#1A1C23] {% endif %} py-1.5 transition duration-300">
+                {{ item.name }}
+            </a>
         {%- endfor %}
     </div>
 </div>

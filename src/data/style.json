@@ -1,0 +1,12 @@
+{
+    "colors": {
+        "bg": "#16161C",
+        "accent": "#59E3E3",
+        "accentText": "#06060C",
+        "active": "#F43E5C",
+        "contrastText": "#1A1C23"
+    },
+    "chars": {
+        "terminalPrompt": "$"
+    }
+}

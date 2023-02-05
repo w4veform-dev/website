@@ -1,0 +1,13 @@
+<div class="px-1 w-full bg-[{{ style.colors.accent }}] text-[{{ style.colors.accentText }}]">
+    <span>{{ style.chars.terminalPrompt }} tree --timefmt "%b %d, %Y" -Dc blog/<span>
+</div>
+<div class="p-3">
+    <p class="text-[{{ style.colors.accent }}]">blog</p>
+    {% set total = collections.post | length %}
+    {% set index = 1 %}
+    {%- for post in collections.post | reverse -%}
+    {% if index == total %}└──{% else %}├──{% endif %}
+    <a href="{{ post.url }}">[{{ post.data.date | dateFilter }}] {{ post.data.title }}</a><br>
+    {% set index = index + 1 %}
+    {%- endfor -%}
+</div>

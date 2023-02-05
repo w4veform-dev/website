@@ -1,31 +1,28 @@
 const fs = require('fs');
-const cleancss = require('clean-css');
 const MarkdownIt = require('markdown-it');
+const dateFilter = require('./src/filters/dateFilter.js');
 
 module.exports = function(eleventyConfig) {
     // Passthroughs //
-    eleventyConfig.addPassthroughCopy("assets");
-
-    // Layouts //
-    eleventyConfig.addLayoutAlias("base", "layouts/layout.njk")
-
-    // Shortcodes //
-    eleventyConfig.addShortcode("command_block", function(command, content_file) {
-        var data = fs.readFileSync("./src/content/command_outputs/" + content_file, 'utf-8');
-        var rendered = new MarkdownIt().render(data);
-        return `
-        <div class="px-10">
-            <div class="mx-auto max-w-screen-2xl border-2 border-cyan-400">
-                <div class="px-1 w-full bg-cyan-400 text-[#1A1C23]">
-                    <span>&lambda; ${command}</span>
-                </div>
-                <div class="p-3">
-                    ${rendered}
-                </div>
-            </div>
-        </div>`;
-    });
+    eleventyConfig.addPassthroughCopy("src/assets");
     
+    // Filters //
+    eleventyConfig.addFilter('dateFilter', dateFilter);
+    eleventyConfig.addFilter('md', function(text) {
+        var rendered = new MarkdownIt().render(text);
+        return rendered;
+    });
+
+    // Collections //
+    eleventyConfig.addCollection('tagsList', (collectionApi) => {
+        const tagsSet = new Set()
+        collectionApi.getAll().forEach((item) => {
+          if (!item.data.tags) return
+          item.data.tags.forEach((tag) => tagsSet.add(tag))
+        })
+        return tagsSet
+      })      
+
     // Base Config //
     return {
         passthroughFileCopy: true,

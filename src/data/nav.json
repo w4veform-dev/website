@@ -9,12 +9,8 @@
             "url": "/blog"
         },
         {
-            "name": "Cookbook",
-            "url": "/cookbook"
-        },
-        {
-            "name": "Guns",
-            "url": "/guns"
+            "name": "About",
+            "url": "/about"
         }
     ]
 }

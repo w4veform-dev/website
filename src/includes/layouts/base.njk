@@ -6,10 +6,15 @@
         <style>
             * {
                 font-family: 'Fira Code', monospace !important;
+                font-variant-ligatures: common-ligatures;
             }
         </style>
     </head>
-    <body class="bg-[#16161C] text-white pt-8">
+    <body class="bg-[{{ style.colors.bg }}] text-white pt-8">
+    {% include "partials/ascii_header.njk" %}
+    <br class="my-4">
+    {% include "partials/nav.njk" %}
+    <br class="my-4">
         {{ content | safe }}
     </body>
 </html>

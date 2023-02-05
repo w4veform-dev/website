@@ -1,0 +1,24 @@
+---
+layout: base.njk
+permalink: /tags/{{ tag | slug }}/
+pagination:
+    data: collections
+    size: 1
+    filter: all
+    alias: tag
+eleventyComputed:
+    title: Tagged “{{ tag }}”
+---
+
+{% set command = "tree --timefmt \"%b %d, %Y\" -Dc \"blog/tags/" + tag + "\"" %}
+{% include "partials/start_code_block.njk" %}
+<p class="text-[{{ style.colors.accent }}]">{{ tag }}</p>
+{% set postlist = collections[ tag ] %} 
+{% set total = postlist | length %}
+{% set index = 1 %}
+{%- for post in postlist | reverse -%}
+{% if index == total %}└──{% else %}├──{% endif %}
+<a href="{{ post.url }}">[{{ post.data.date | dateFilter }}] {{ post.data.title }}</a><br>
+{% set index = index + 1 %}
+{%- endfor -%}
+{% include "partials/end_code_block.njk" %}
