@@ -3,6 +3,8 @@ const MarkdownIt = require('markdown-it');
 const dateFilter = require('./src/filters/dateFilter.js');
 
 module.exports = function(eleventyConfig) {
+    // Watch Folders //
+    eleventyConfig.addWatchTarget("src/assets");
     // Passthroughs //
     eleventyConfig.addPassthroughCopy("src/assets");
     
