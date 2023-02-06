@@ -1,43 +1,34 @@
-<html>
-    <head>
-        {% include "partials/meta.njk" %}
-        <!-- <link rel="stylesheet" href="/assets/style.css"> -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            * {
-                font-family: 'Fira Code', monospace !important;
-            }
-            p {
-                padding-bottom: 12px;
-            }
-        </style>
-    </head>
-    <body class="bg-[#16161C] text-white pt-8">
-        {% include "partials/ascii_header.njk" %}
-        <br class="my-4">
-        {% include "partials/nav.njk" %}
-        <br class="my-4">
-        <div class="mx-auto sm:max-w-prose md:max-w-prose lg:max-w-4xl xl:max-w-5xl py-3">
-            <div class="flex flex-row relative">
-                <h1 class="text-2xl basis-4/5">{{ title }}</h1>
-                <div class="relative basis-1/5">
-                    <h2 class="absolute top-8">{{ date | dateFilter }}</h2>
-                </div>
-            </div>
-            <div class="tags--container">
-        tags: 
-        {% set total = tags | length %}
-        {% set index = 0 %}
-        {% for tag in tags %}
-            {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
-            {% set index = index + 1 %}
-            <a class="text-[{{ style.colors.accent }}]" href="{{ tagUrl | url }}">{{ tag }}</a>{% if index < total %},{% endif %}
-        {% endfor %}
+---
+layout: base.njk
+---
+
+<style>
+    p {
+        padding-bottom: 12px;
+    }
+</style>
+
+<div class="mx-auto max-w-4xl py-3">
+    <div class="flex flex-row relative">
+        <h1 class="sm:text-6xl md:text-6xl lg:max-2xl:text-2xl basis-3/5">{{ title }}</h1>
+        <div class="relative basis-2/5">
+            <h2 class="absolute top-8 right-0">{{ date | dateFilter }}</h2>
         </div>
-            <hr class="pb-1 mt-2">
-        </div>
-        <div class="mx-auto sm:max-w-prose md:max-w-prose lg:max-w-4xl xl:max-w-5xl">
-            {{ content | safe }}
-        </div>
-    </body>
-</html>
+    </div>
+    <div class="tags--container">
+tags: 
+{% set total = tags | length %}
+{% set index = 0 %}
+{% for tag in tags %}
+    {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+    {% set index = index + 1 %}
+    {% if tag != "post" %}
+    <a class="text-[{{ style.colors.accent }}]" href="{{ tagUrl | url }}">{{ tag }}</a>{% if index < total %},{% endif %}
+    {% endif %}
+{% endfor %}
+</div>
+    <hr class="pb-1 mt-2">
+</div>
+<div class="mx-auto max-w-4xl">
+    {{ content | safe }}
+</div>

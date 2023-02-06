@@ -1,20 +1,20 @@
-<html>
+<!DOCTYPE html>
+<html lang="{{ meta.locale }}">
     <head>
         {% include "partials/meta.njk" %}
         <link rel="stylesheet" href="/assets/style.css">
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <style>
             * {
-                font-family: 'Fira Code', monospace !important;
+                font-family: "Fira Code", monospace;
                 font-variant-ligatures: common-ligatures;
             }
         </style>
     </head>
-    <body class="bg-[{{ style.colors.bg }}] text-white pt-8">
+    <body class="bg-[{{ style.colors.bg }}] sm:text-3xl lg:max-2xl:text-base 2xl:text-base text-[{{ style.colors.text }}] pt-8">
     {% include "partials/ascii_header.njk" %}
-    <br class="my-4">
+    <br class="my-4 md:my-8">
     {% include "partials/nav.njk" %}
-    <br class="my-4">
+    <br class="my-4 md:my-8">
         {{ content | safe }}
     </body>
 </html>

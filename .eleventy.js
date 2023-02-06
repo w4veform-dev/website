@@ -22,6 +22,7 @@ module.exports = function(eleventyConfig) {
           if (!item.data.tags) return
           item.data.tags.forEach((tag) => tagsSet.add(tag))
         })
+        tagsSet.delete("post");
         return tagsSet
       })      
 

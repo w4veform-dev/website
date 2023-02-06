@@ -1,7 +1,8 @@
 {
-    "title": "{{ site.name }}",
-    "description": "Welcome!",
-    "url": "",
+    "title": "W4veform",
+    "description": "My corner of the internet",
+    "url": "https://w4veform.dev",
     "lang": "en",
-    "locale": "en_us"
+    "locale": "en_us",
+    "image": "https://w4veform.dev/assets/meta_preview.jpg"
 }

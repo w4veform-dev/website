@@ -1,9 +1,9 @@
-<div class="navbar mx-auto sm:max-w-prose md:max-w-prose lg:max-w-4xl xl:max-w-5xl">
-    <div class="grid grid-cols-{{ nav.items.size }} gap-4 grid-flow-col">
+<div class="max-w-4xl mx-auto lg:max-w-prose xl:max-w-5xl">
+    <div class="sm:text-2xl lg:max-2xl:text-base 2xl:text-base grid grid-rows-{{ nav.items.size }} lg:mx-2xl:grid-cols-{{ nav.items.size }} 2xl:grid-cols-{{ nav.items.size }} gap-4 grid-flow-rows lg:max-2xl:grid-flow-col 2xl:grid-flow-col">
         {%- for item in nav.items %}
             {%- set Current = (item.url == page.url) -%}
             {%- set Parent = item.url != '/' and item.url in page.url -%}
-            <a href="{{ item.url }}" class="text-center border-2 {% if Current or Parent %}border-[{{ style.colors.active }}] {% else %}border-[{{ style.colors.accent }}] {% endif %} py-1.5">
+            <a href="{{ item.url }}" class="text-center border-2 {% if Current or Parent %}border-[{{ style.colors.active }}] {% else %}border-[{{ style.colors.accent }}] {% endif %} sm:py-6 lg:max-2xl:py-1.5 2xl:py-1.5">
                 {{ item.name }}
             </a>
         {%- endfor %}
